@@ -1,0 +1,61 @@
+//npm (Node Package Manager) is used to install and manage JavaScript packages and dependencies. When you run npm install, it downloads the package to your local node_modules folder, making it available for future use.
+
+//npx (node packet executer)is a tool used to execute Node.js packages directly without needing to install them globally or locally. It allows you to run commands from the npm registry temporarily, which is useful for running one-time tasks or testing packages.
+//vite/parcel is a bundler jo bhohot  sari files combine karake hame de deta hai 
+//dev dependencies are only needed while development they aare not needed when we deploy our project in production 
+//javascript ko kaam karane keliye use html file mai inject hona padta(for ex jo ham script tag likhte hai html vaha par ham js inject kar rahe hai)--same thing for react jo ki behind the scenes javascript hi hai ,react native--react ka ek implementation hai mobile apps par vaisehi reac-dom--react ka ek implementation hai web pe
+//browser ka ek khud ka dom hota hai react bhi ek khudka dom banata hai jise virtual dom bolte hai aur fir ye main dom kkko compare karata hai ,, reactDOM ke undar ek method hota hai create root ,creeeate root kya expext karata hai ki aap mujhe ek html ka element select karake do 
+//jsx--javascript ke andar html return hoti hai 
+react-single page application, // continue --keyword is used in loop to skip the current iteration and proceed to next one 
+//Babel React applications mein ek powerful JavaScript compiler ki tarah kaam karta hai. Yeh developers ko modern JavaScript (ES6+) aur JSX code likhne ki ijazat deta hai, jise yeh aise code mein transpile karta hai jo web browsers samajh sakein.Web browsers, jaise Chrome, Firefox, aur Safari, HTML, CSS, aur JavaScript ko samajhte hain. Yeh browsers websites ko render karne ke liye in languages ka istemal karte hain.
+//reconciliation
+The algorithm React uses to diff one tree with another to determine which parts need to be changed.
+//Virtual DOM: React creates a virtual representation of the DOM (a lightweight in-memory copy), which allows React to quickly check changes without manipulating the actual browser DOM immediately.
+
+Diffing Process: When the state or props of a component change, React compares the new virtual DOM (after changes) to the previous one. This comparison process helps React identify what has changed, where, and how.
+
+Tree Reconciliation:
+
+React compares the old and new trees at each level. It starts at the root and moves down.
+If React finds that the elements are of different types (e.g., a div changing to a span), it will unmount the old component and mount the new one.
+If the elements are of the same type, React compares their properties and updates only the necessary parts of the DOM, minimizing unnecessary re-renders and improving performance.
+Efficient Updates: React's algorithm is optimized to make as few changes as possible to the actual DOM. It uses a "key" system for lists of elements to minimize re-rendering when items are added or removed.
+//Reconciliation is a key optimization technique used by React to efficiently update the user interface (UI) without re-rendering the entire app. It works by leveraging the "virtual DOM," a lightweight in-memory representation of the real DOM.
+
+Virtual DOM: React creates a virtual DOM to represent the current state of the app. Instead of updating the actual DOM directly after every change, React first updates the virtual DOM.
+
+Diffing Algorithm: When the state of a component changes, React performs a "diffing" process, comparing the old virtual DOM with the new one. This algorithm identifies what parts of the UI have changed and need to be updated.
+
+Efficient Re-rendering: Rather than re-rendering the entire UI, React only updates the changed parts, minimizing costly DOM operations. This results in a significant performance boost, especially in large apps.
+
+React Fiber: React's Fiber architecture improves the reconciliation process by allowing React to break the work into smaller units and prioritize updates for optimal performance [1][4].
+
+These optimizations allow React to give the appearance of a full re-render while maintaining high performance.
+
+
+//The color='primary' you are seeing in the JSX file is most likely coming from Material UI (MUI), not Bootstrap or Tailwind CSS. Here's why:
+
+Material UI (MUI): The color="primary" prop is commonly used in Material UI components to apply the theme's primary color. Material UI (MUI) uses predefined color properties such as primary, secondary, error, etc., which are based on the theme you've defined for the app [1].
+
+Tailwind CSS: Tailwind doesn't use color='primary' syntax. Instead, it applies utility classes like text-primary, bg-primary, etc. Tailwind also doesn't provide built-in theme-based color props like primary or secondary out-of-the-box [5].
+
+Bootstrap: Bootstrap uses a different system for handling colors, typically through utility classes like bg-primary, text-primary, etc., but it doesn't support color="primary" as a direct prop for JSX components.
+
+So, if you haven't added Bootstrap, it's very likely that the color prop is coming from Material UI, especially if you're using MUI components (e.g., Button, Card, etc.).
+
+
+
+
+
+
+In React, when you use the setState method with a function that takes prevState as an argument (like prevState => prevState + 1), it is a functional update. This ensures that each state change is based on the most recent state, rather than the state at the time the event was triggered.
+
+However, React batches state updates to optimize performance. Even though you're calling setState three times in succession, React will only apply one re-render after all updates are processed.
+
+What happens in your case:
+React doesn't immediately update the state after each setState call. It batches the updates together.
+After the first setState, React doesn't apply the change immediately. Instead, it waits for the next setState to apply all changes at once.
+When React applies the state change, it will use the latest state for each setState function call, so prevState + 1 happens three times.
+The final result will be prevState + 3 (not 1, 2, or 3 calls independently).
+So, even though you have three setState calls, the state will only update once and will increase by 3, not 1 three times.
+
