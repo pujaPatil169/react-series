@@ -381,3 +381,19 @@ Ensure that any component using Link or NavLink is inside a Router.
 
 jaise a tag me href hota hai vaise Link aur NavLink mai to attribute hota hai jisme ham route likhte hai
 //multi page applications jab ham react me banate hai tab navigation karate vakta paage reload nai hota,react me maii hum multi page application banate hai react router dom ko use karakar
+
+
+package.json
+"type":"module" ab jo hai manifest kko pata hai mujhe(manifest) jo sari javascriipt files assembel karani hai vo mujhe module ke taraha assembel karani hai na ki common js ki tarah
+//apko pata hona chahiye sari js ki file kis tarah se assembel ki jayegi
+//kaahi na kahi files node module , node js folder mai rakhi hai to inko kaise laye assembel kare ye apane type mai bataya hai (import/export  || require(common js))
+
+
+ham bana to react app hi rahe hai par har kisi ka banane ka tarika alag alag hai kuch log s vite se ,kuch parcel,kuch log create reat app(cra) se banayenge ye dekhiye alag alag bundlers hai inkko bolte hai toolchain ,toolchain ka matlab kya hai hota hai dekhiye react ke andar jab aap application likhte hai aapne main.js likha index.js ye vo js likhte end of the day web ko samajh me to html,css aur js hi ata hai ye jo toolchains hai na ye apkko help karati hai in chijo ko bundle karane mai so inko bundlers bhi bola jata hai naam alag alag hai kam lab bhag same hi hai ki sari js ki files lo aur jo browser samajhta hai html,css , js usme convert kardo
+
+vite,parcel,cra==bundlers==kam==sari js ki files lo aur jo browser samajhta hai html , css, javascriipt usme convert kardo
+
+//axios -- ye library basically likhi gayi hai web requsts karane keliye to data kis tarah se araha hai kaise handle ho raha hai fail hogaya to kya situation hogi loading horaha hai to kya situation hogi bich mai us data ko rok ke kuch add karana hai usake andar,.ye requst jaraahi hai to usko roko usme add karado api keys  to vo sare jo producion level featurs hai vo apko axios vagra inme by default mil jate hai isliye log axios ko prefer karate hai
+axios jo data fetch karata hai use mai hame json mai convert karane ke jarurat nai kyki axios automatically behind the scenes data ko json mai convert karake hame final data deta hai unlike fetch jaha par hame jo data fetch se mila hai use json mai convert karana padtaa hai
+
+//abhi mai chahti hu jabh meri ye application load ho tabhi mere pass data aajaye
