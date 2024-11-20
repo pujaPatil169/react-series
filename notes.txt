@@ -47,7 +47,6 @@ So, if you haven't added Bootstrap, it's very likely that the color prop is comi
 
 
 
-
 In React, when you use the setState method with a function that takes prevState as an argument (like prevState => prevState + 1), it is a functional update. This ensures that each state change is based on the most recent state, rather than the state at the time the event was triggered.
 
 However, React batches state updates to optimize performance. Even though you're calling setState three times in succession, React will only apply one re-render after all updates are processed.
@@ -59,3 +58,326 @@ When React applies the state change, it will use the latest state for each setSt
 The final result will be prevState + 3 (not 1, 2, or 3 calls independently).
 So, even though you have three setState calls, the state will only update once and will increase by 3, not 1 three times.
 
+
+//different casings used in different things
+CamelCase:reat(jsx),javascript(dom manupulation),material ui
+This convention capitalizes the first letter of each word (except the first one) and eliminates spaces. It’s used in:
+
+React (JSX): e.g., className, onClick, backgroundColor (React properties follow camelCase).
+Material UI: e.g., color="primary", variant="outlined" (Material UI uses camelCase for its props and attributes).
+
+Kebab-case:css,Tailwind,bootstrap
+This convention uses hyphens to separate words. It’s commonly used in CSS and Tailwind CSS for class names and utilities.
+
+Tailwind CSS: e.g., bg-red-500, text-center (Tailwind uses kebab-case for its utility classes).
+CSS: e.g., background-color, font-size (Standard CSS uses kebab-case for property names).
+
+PascalCase:
+This format is similar to camelCase but starts with a capital letter. It is typically used for React component names.
+
+React Components: e.g., MyComponent, Button (React components often use PascalCase).
+
+//diffrence between jsx and regular css in writing of inline styles 
+
+Double Curly Braces ({{}}) in JSX (React): In React (JSX), inline styles are passed as JavaScript objects, so the first pair of curly braces is used to indicate that we're writing JavaScript within JSX. The second pair { backgroundColor: "green" } is the actual JavaScript object syntax where the style properties are defined as key-value pairs. For example:
+
+jsx
+Copy code
+<div style={{ backgroundColor: "green" }}>
+This allows React to handle the styles dynamically, allowing you to use JavaScript variables and logic inside the style object.
+
+Single Curly Brace in HTML: In traditional HTML, the style attribute is a string, not a JavaScript object. Therefore, the styles are directly written as a string within the HTML tag:
+
+html
+Copy code
+<p style="color: blue; font-size: 20px;">This is a blue, 20px text.</p>
+In short, React's JSX syntax requires double curly braces to distinguish JavaScript objects, whereas in regular HTML, the style attribute accepts a simple string of CSS rules.
+
+//---------styling syntax ------------------------------
+
+
+In web development, you often encounter different syntax variations depending on the context, such as raw CSS, frameworks like Tailwind or Bootstrap, or JavaScript/React-based code like JSX or Material UI. The differences between color: 'red' and color='red' stem from different usage conventions. Below, I'll clarify the contexts and give examples for each case.
+
+1. CSS (Regular Stylesheets)
+In a CSS file, you use the colon (:) to separate properties from their values.
+
+Example (CSS):
+
+css
+Copy code
+/* In a CSS file */
+p {
+  color: red; /* Use a colon (:) here */
+}
+Explanation: The colon is part of the CSS syntax, which specifies that the property (color) is assigned the value (red).
+2. Inline Styles in React (JSX)
+In React JSX, inline styles are passed as a JavaScript object, so key-value pairs are used, and the property names are camelCased.
+
+Example (React JSX):
+
+jsx
+Copy code
+// In a React component
+function App() {
+  return <p style={{ color: 'red' }}>This is red text.</p>;
+}
+Explanation: In React, you use double curly braces {{}} because the first set is for JSX syntax, and the second is for defining a JavaScript object. The colon (:) is used in the object to separate the key (color) from the value ('red').
+3. Tailwind CSS
+Tailwind CSS is a utility-first CSS framework where you don't define CSS directly in your stylesheets but use class names in your HTML/JSX.
+
+Example (Tailwind CSS):
+
+html
+Copy code
+<!-- In an HTML file using Tailwind CSS -->
+<p class="text-red-500">This is red text.</p>
+Explanation: Tailwind uses class names like text-red-500 for utility classes. There's no use of : or = for property-value pairs in this case. Instead, it's predefined through Tailwind's utility classes.
+4. Bootstrap
+Bootstrap also uses classes to apply styles to HTML elements.
+
+Example (Bootstrap):
+
+html
+Copy code
+<!-- In an HTML file using Bootstrap -->
+<p class="text-danger">This is red text.</p>
+Explanation: Bootstrap applies styles via classes like text-danger. No colon or equal sign is used in the markup itself. You simply apply predefined class names.
+5. Material UI (React)
+Material UI is a React component library that uses JavaScript objects or CSS-in-JS for styling. The colon (:) is used when defining CSS properties in a JavaScript object.
+
+Example (Material UI with makeStyles or styled):
+
+jsx
+Copy code
+// Using Material UI makeStyles
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  redText: {
+    color: 'red', // colon used for object properties in JavaScript
+  },
+}));
+
+function App() {
+  const classes = useStyles();
+  return <p className={classes.redText}>This is red text.</p>;
+}
+Explanation: When using makeStyles in Material UI, you define styles in a JavaScript object, so you use the colon syntax to specify property-value pairs.
+6. React (JSX with String Attributes)
+Sometimes you’ll see React properties passed as strings, particularly when setting HTML attributes or passing props directly.
+
+Example (React JSX with String):
+
+jsx
+Copy code
+function App() {
+  return <button style={{ color: 'red' }}>Click me</button>;
+}
+Explanation: The style attribute is passed an object in JavaScript (using the colon). But for HTML attributes (like className), the syntax involves setting the attribute directly with = in JSX, which is how React distinguishes between HTML attributes and JavaScript properties.
+Key Differences: Colon vs Equal Sign
+Colon (:):
+
+Used in CSS files or JavaScript objects (like in inline React styles).
+For example: color: 'red' (used in style={{ color: 'red' }}).
+Equal Sign (=):
+
+Used in HTML attributes or JSX properties.
+For example: className="text-red-500" or color="red" in JSX.
+
+-----------------------end of stylling syntax article -----------------------------
+
+//---------------dynamic component styling --------------------------------------------------
+//if there is static styles put that in the style sheet , if there is dynamic styles put that styles inline in object  <b styles = {{color:'purple'}},if styles are dynammic use style attribute inline 
+//in case of css properties are kebab cased  while in react,javascript they are camel case 
+
+//in the world of react, react needs a unique idntifier  for each element in the list so that it can keep track of that element when it compares old virtual dom with new and changes real dom accordingly 
+
+
+
+
+// Yes, there are a couple of issues with your code:
+
+// 1. Nested curly braces inside JSX:
+// In the return statement, you're using nested curly braces {} which is incorrect for rendering the mapped list. You don't need to wrap your properties.map() call in an additional pair of {}. You can just return the mapped elements directly from the map function.
+
+// 2. Misuse of images.map():
+// If you're trying to render a card for each property with its corresponding image, it seems you're trying to loop through images and for each image, loop through properties. However, this doesn't seem to align with the expected structure. Each property likely has an image, so you need to map over properties and get the corresponding image for each.
+
+// 3. The structure of your ImgMediaCard component:
+// Ensure that the ImgMediaCard component expects the correct props (image and data). I'm assuming image corresponds to the image of a specific property, and data holds the property details.
+
+// Corrected code:
+// Assuming properties is an array of objects and each property object has an id, and images is an array of image objects corresponding to the properties, you might want to do something like this:
+
+// jsx
+// Copy code
+// export default function PropertyList({ properties, images }) {
+//   return (
+//     <ul>
+//       {properties.map((property, index) => (
+//         <ImgMediaCard key={property.id} image={images[index]} data={property} />
+//       ))}
+//     </ul>
+//   );
+// }
+// Explanation:
+// Mapping through properties: You map through the properties array and use index to access the corresponding image in the images array.
+// Pass the correct image and data to ImgMediaCard: You pass images[index] as the image prop, and property as the data prop to ImgMediaCard.
+// Assumptions:
+// properties is an array of objects where each object has an id.
+// images is an array of images, and each image corresponds to the index of a property in the properties array.
+// ImgMediaCard is a component that takes two props: image and data.
+// Let me know if your setup is different and I can adjust the explanation!
+
+//----------------related to managing  images size------------------------------
+Case 1:
+css
+Copy code
+.image {
+    max-width: 200px;
+    max-height: 150px;
+    object-fit: cover;
+}
+Effect on Image: This rule limits the image size to 200px width and 150px height as the maximum values.
+
+If the image's natural dimensions (width and height) are smaller than these values, it will display at its original size without stretching.
+If the image's natural size is larger, it will be scaled down to fit within the 200px width and 150px height limits. The aspect ratio will be preserved.
+object-fit: cover; ensures that the image fills the container, cropping parts of it if the aspect ratio doesn't match.
+When the image is smaller than the max dimensions: It will remain at its original size and not be resized.
+
+When the image is larger than the max dimensions: The image will be resized to fit within the specified maximum dimensions, maintaining the aspect ratio and cropping if necessary.
+
+Case 2:
+css
+Copy code
+.image {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+}
+Effect on Image: Here, both width and height are explicitly set to 200px and 150px. The image will always be stretched or shrunk to these exact dimensions, regardless of its original size.
+
+object-fit: cover; ensures the image still fills the container and might crop if the aspect ratio differs from the container's.
+When the image is smaller than the specified size: It will be stretched to fit 200px width and 150px height.
+
+When the image is larger than the specified size: It will be shrunk to fit the 200px width and 150px height, potentially cropping the image to preserve the container's aspect ratio.
+
+Key Difference:
+Max-Width/Max-Height (max-width, max-height) allow the image to stay smaller than the specified size if its natural size is smaller.
+Fixed Width/Height (width, height) forces the image to always match the specified dimensions, regardless of the image's natural size.
+
+//-----------------------------DOM  Events ----------------------------------
+//in the regular javascriipt(vanila javascritpt) the event names are not camel case but when we use that same events in jsx(react) we must need to wriitee them in camel case , well all the DOM Events that exist in vanila js they are also available to use in react(jsx) but thee only difference is in jsx we need to write them in camel case
+
+
+//our eventhandler is automatically passed with an event object that is same in react , whether it's vanilla js or react both have this same thing(event object) passed automatically inside an eevent handler
+
+
+//props are immutable components cannot change the value of there props ,anytime we have data that we want to change within a component we wil involve state
+//reaact hook ---- hook is basically a function that react gives us  that we then choose to incorporate  in our component to add some sort of funcionality most common one is usestate it adds state into the component ,useState must be called inside react component it can't be called outside
+//we can have multiple pieces of states in a component ,you can use useState hook as many times as you want you within a component and it's not uncommon to use it multiple time s
+
+
+//useCallback hook
+//
+//In React, memoization refers to the technique of caching the result of a function or a value to avoid recalculating it on every render. The useCallback hook is used to memoize functions by ensuring that the function reference stays the same between re-renders, unless the specified dependencies change.
+
+When a component re-renders, React typically creates a new instance of all functions. This can lead to unnecessary re-renders of child components or unnecessary re-executions of effects. By using useCallback, React will only recreate the function when its dependencies (usually props or state) change. This helps in improving performance, especially in components with complex trees
+
+//-------------custom hooks -----------------
+
+//agar aapke pass fiile mai jsx return ho raha hai to file ke nam mai extension .jsx lagao aur agar jsx return nai ho raaha js return horaha hai to extension .js rakho ,hooks majority of the cases mai js return karate hai , custom hooks built in hooks ko use kar sakate hai
+//har bar ek object ko access kaarane keliye dot jaruri nai hai
+
+//jsx se hi to aapke dom element banate hai ,jab bhi aap loop lagayenge kisi jsx ke andar to aap ko ek key pass karani hi padegi nai to react samajh ni payega ki aap ek hi
+element bar bar to nai bana rahe ,"remember the key in loops in react "
+
+
+Outer Curly Braces ({}): These are part of JSX syntax and indicate that the enclosed content is a JavaScript expression. JSX requires this syntax to differentiate between HTML-like markup and JavaScript code [2].
+
+Inner Curly Braces ({}): The inner curly braces define a JavaScript object. Inline styles in React are applied as JavaScript objects, where the keys are CSS property names (in camelCase) and values are the corresponding CSS values [3].
+
+Example:
+jsx
+Copy code
+<div style={{ backgroundColor: 'blue', color: 'white' }}>
+  Hello, styled div!
+</div>
+The outer {} tells JSX to interpret the value as a JavaScript expression.
+The inner {} creates the style object ({ backgroundColor: 'blue', color: 'white' }).
+
+
+React provide the feature of Link instead of <a> because <a> reloads the entire page. React also provides NavLink with some additional features like highlighting the active nav page.
+
+
+jaise apko react ke sath useEffect, useState aur kai sari chije(functionality ) milti hai vaise hi reacter router dom install karane par aapko link,NavLink aisi functionaliity miltii hai
+
+--------------------react router dom-----------------------------
+//link ham use karate hai incase of a tag ,a tag jab bhi aap use kaarte hai tab apka page pura refresh hota hai , a tag use kiya to pura page reload hota hai sab kuch dubara se paint hota hai(banata haii
+//
+//React Router Basics
+<Link>: A component from react-router-dom that allows navigation within the app without reloading the page. It's used instead of the traditional <a> tag to ensure a single-page application (SPA) behavior [3].
+
+<NavLink>: Similar to <Link>, but provides an additional feature: it identifies if the link's target route matches the current URL and applies a custom style or class based on that [5].
+
+)
+
+
+Difference Between <Link> and <NavLink>
+<Link>: Used for basic navigation.
+jsx
+Copy code
+<Link to="/about">About</Link>
+<NavLink>: Adds an isActive prop, letting you style the active link dynamically. This is useful for menus and navigation bars.
+jsx
+Copy code
+<NavLink
+  to="/about"
+  className={({ isActive }) => (isActive ? "active-class" : "inactive-class")}
+>
+  About
+</NavLink>
+
+
+. How isActive Works
+Purpose: Indicates if the current route matches the link's target route.
+How: When a NavLink renders, it evaluates the to prop against the current path. If they match, isActive is true.
+Example:
+javascript
+Copy code
+className={({ isActive }) => isActive ? "text-orange-700" : "text-gray-700"}
+If the link is active, it gets text-orange-700.
+If inactive, it gets text-gray-700.
+
+ Why Pass Classes Inside a Callback?
+Dynamic Styling: The callback allows you to apply different styles based on the isActive value.
+Reusable Code: Instead of writing separate logic for each link, you handle all styles dynamically in one place.
+
+//-----------wrapping inside Router component ---------------------------
+
+he error you're encountering is related to the usage of the Link component from react-router-dom. This error typically occurs when a Link or NavLink is used outside of a Router component.
+
+To fix this issue, you need to ensure that your Header component (and any component that uses Link or NavLink) is wrapped inside a Router.
+
+import React, { useState } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Header from './components/Header/Header';
+
+function App() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <Router>
+      <Header />
+      {/* Other components and routes can be added here */}
+    </Router>
+  );
+}
+
+Wrapped the Header component in a Router component to provide the necessary context for routing.
+Ensure that any component using Link or NavLink is inside a Router.
+
+
+jaise a tag me href hota hai vaise Link aur NavLink mai to attribute hota hai jisme ham route likhte hai
+//multi page applications jab ham react me banate hai tab navigation karate vakta paage reload nai hota,react me maii hum multi page application banate hai react router dom ko use karakar
