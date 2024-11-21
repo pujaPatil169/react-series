@@ -1,7 +1,10 @@
 import express from 'express';
-
+import cors from 'cors';
 const app = express();
-
+//the below configuration of origin inside app.use middleware allows request from domain specified in origin to hit on the backend server(localhost:3000 in this case )
+app.use(cors({
+  origin:"http://localhost:5173"         // Replace with your frontend's domain
+}))
 const quotesArray = [
     {
       id: 1,

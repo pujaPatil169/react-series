@@ -12,7 +12,7 @@ useEffect(()=>{
 },[]);
   return (
     <>
-     <h1>Mai aur FullStack(tanttdan) With React!!</h1>
+     <h1> FullStack With React!!</h1>
      <p>{
            quotes.map((quote)=>(
             <div key={quote.id}>
