@@ -6,9 +6,7 @@ import { Outlet } from 'react-router-dom';
 export default function Layout(){
      return(
         <>
-        <Header/>
-        <Outlet/>
-        <Footer/>
+  <h1 className='bg-green-600 p-4 uppercase'>React Router</h1>
        </>
      )
 }

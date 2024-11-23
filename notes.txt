@@ -397,3 +397,11 @@ vite,parcel,cra==bundlers==kam==sari js ki files lo aur jo browser samajhta hai 
 axios jo data fetch karata hai use mai hame json mai convert karane ke jarurat nai kyki axios automatically behind the scenes data ko json mai convert karake hame final data deta hai unlike fetch jaha par hame jo data fetch se mila hai use json mai convert karana padtaa hai
 
 //abhi mai chahti hu jabh meri ye application load ho tabhi mere pass data aajaye
+
+//prop drilling
+//--------------context api-----------------
+//context api associated hai pure aur pure react se , ye react ke bahar exist nai karata hai
+context api jo kamm karata hai redux bhi same kam karata hai,context api alag se download karane ki jarurat nai hai ye react ke sath hi ata hai (useContext)
+context api -- matlab ek global variable bana raha hu usake andar sara data jayega
+redux--state managent --manages state in organise way
+,redux ke kai versions hai redux ek sTandalone library hai par react ke andar agar hame kam karana hai to ek library hai react-Redux  to isko bhi ham log use kar lete hai ,is redux ka hi easier version market mai jisko bola jata hai redux-toolkit(RTK)

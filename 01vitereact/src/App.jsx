@@ -9,6 +9,7 @@ import Clicker from "./components/Clicker";
 import ColorBoxContainer from "./components/ColorBoxContainer";
 import BackgroundChanger from "./components/BackgroundChanger";
 import PasswordGenerator from "./components/PasswordGenerator";
+import Checked from "./components/Checked";
 const properties = [
   { id: 129031, name: "Desert Yurt", rating: 4.9, price: 150 },
   { id: 129331, name: "Lone Mountain Cabin", rating: 4.8, price: 250 },
@@ -66,7 +67,8 @@ function App() {
      {/* <ColorBoxContainer colors={colors}/> */}
      {/* <ImgMediaCard/> */}
      {/* <BackgroundChanger colors={colors}/> */}
-     <PasswordGenerator />
+     {/* <PasswordGenerator /> */}
+     <Checked/>
     </div>
   )
 }
