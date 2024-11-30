@@ -1,3 +1,6 @@
+//ui updation ko react control karata hai
+useState hook--aapki state ko change karane keliye responsible ,change ka matlab ye ani hai ki aapki values update karadi is change ko propogate kiya jata hai aapke ui ke andar apke dom ke andar
+
 //npm (Node Package Manager) is used to install and manage JavaScript packages and dependencies. When you run npm install, it downloads the package to your local node_modules folder, making it available for future use.
 
 //npx (node packet executer)is a tool used to execute Node.js packages directly without needing to install them globally or locally. It allows you to run commands from the npm registry temporarily, which is useful for running one-time tasks or testing packages.
@@ -8,11 +11,73 @@
 //jsx--javascript ke andar html return hoti hai 
 react-single page application, // continue --keyword is used in loop to skip the current iteration and proceed to next one 
 //Babel React applications mein ek powerful JavaScript compiler ki tarah kaam karta hai. Yeh developers ko modern JavaScript (ES6+) aur JSX code likhne ki ijazat deta hai, jise yeh aise code mein transpile karta hai jo web browsers samajh sakein.Web browsers, jaise Chrome, Firefox, aur Safari, HTML, CSS, aur JavaScript ko samajhte hain. Yeh browsers websites ko render karne ke liye in languages ka istemal karte hain.
+//browser pure dom ko remove kaarata hai aur pure dom ko vapis se repaint karata hai isiko page reload kehte hai dom pura ka pura structure tayar ho raaha hai isliye jo loading vala icon ata hai vo isi ki vajah se ata hai ki pura ka pura dom vapis se repaint ho raha hai (repaint se mera matlab web structure dobara se tayar ho raha hai )
+//The Virtual DOM (VDOM) is simply a JavaScript representation of the actual DOM (the real page elements).
+It allows React to make changes in memory without directly modifying the DOM, which is slow.
+//lekin vertual dom mai kya hota hai ki aap pura ka pura dom trace kar sakate ho track kar sakate ho tree like structure mai
+
+//ReactDOM.createRoot-- isme ye createRoot jo method hai ye bada hi intetresting method hai ye behind the scenes kya karata hai ek pura ka pura dom like structure create karata hai jaise browser ke pas ek dom hota hai vaisehi createRoot bhi ek dom create karata hai aur isko dom create karane ki kyu jarurat kyuki ye main dom aur aapane dom ko compare karata hai aur sirf unhi chijo ko real dom mai update karata hai jo actual mai uii mai update hui hai. real dom pura vapase se repaint nai hota sirf vahi part hota hai jo ui mai update hua hai aur iss update ki janakari hame milati hai VDOMs ke old aur new version ko compare karake
+
+//React doesn’t actually create a "new" Virtual DOM every time.
+Instead, React creates a new Virtual DOM tree every time the component renders, but only the parts that need updating are re-rendered in the real DOM.
+Reconciliation is the process that compares the new Virtual DOM tree with the old Virtual DOM tree (from the previous render), and figures out what has changed.
+//React Fiber (React’s Reconciliation Engine):
+In earlier versions of React, this reconciliation process was a bit simpler but also a little inefficient and slow for complex UIs. React Fiber was introduced to improve this.
+
+//Fiber is the new reconciliation algorithm in React, which allows React to schedule and prioritize updates more efficiently.
+React Fiber breaks the entire rendering process into smaller chunks that can be executed asynchronously. This allows React to handle updates in multiple phases, giving React the ability to pause work, continue later, and prioritize important updates.
+So, how does React use Fiber in the updating process?
+When state or props change, React starts the reconciliation process using Fiber.
+
+//Fiber Splits the Work: Instead of trying to do everything at once, Fiber allows React to process updates in smaller chunks. This makes React faster, especially for large applications. If there are other tasks (like user interactions), React can pause the update and resume it later. This is important for responsiveness.
+
+//Creating the New Virtual DOM: React uses the new state/props to re-render the component and create a new Virtual DOM. At this point:
+
+//The new Virtual DOM is just an updated in-memory representation of what the UI should look like.
+React still keeps the previous Virtual DOM (from the last render).
+Diffing: React compares the new Virtual DOM with the old Virtual DOM. This is the diffing process. React looks at the two trees and calculates what has changed (e.g., which components need to be updated).
+
+//Updating the Real DOM: Once React knows what has changed, it only updates the parts of the real DOM that are different (based on the diff). This is the core benefit of React: instead of re-rendering the entire DOM tree, React efficiently updates just the necessary parts.
+
+//3. Detailed Flow of UI Update: Step-by-Step
+Let’s walk through an example of how React updates the UI, keeping Fiber and Virtual DOM in mind:
+
+//Initial Render:
+
+//You have a component that displays a counter.
+React calls the render() function of the component, and it creates an initial Virtual DOM based on the JSX.
+This Virtual DOM is then compared to the real DOM, and the differences are applied to the real DOM (e.g., inserting the counter element).
+State Change (e.g., setState() is called):
+
+//When the user clicks a button to increase the counter, setState() is triggered.
+React starts the reconciliation process. It checks if there’s any change in the state (like the counter value).
+Fiber Starts Working:
+
+//Fiber schedules this update and breaks down the entire process into smaller units.
+Fiber is capable of pausing and resuming the work, depending on the priority of the update. For instance, if this update is not high-priority, it will allow other high-priority tasks (like handling user input) to finish first.
+Creating New Virtual DOM:
+
+//React re-renders the component with the new state (this.state.counter has changed).
+This results in a new Virtual DOM tree.
+Diffing Process:
+
+//React compares this new Virtual DOM tree to the previous one (from the last render).
+It sees that only the text content of the counter has changed (e.g., the number of the counter).
+React marks only that part as changed.
+Update the Real DOM:
+
+//React then updates only the real DOM where the counter value has changed (no need to re-render the whole UI).
+This update is efficient because it only modifies the text node of the counter, and nothing else.
+Fiber and Asynchronous Updates:
+
+//If there are other tasks or updates to perform, Fiber allows React to pause and resume the update process efficiently.
+
+//abhi react behind the scenes fibre algorithm use karati hai vahi vertual dom ko update karaane keliye(vertual dom ko update karane vali algorithm hai fibre)
 //reconciliation
 The algorithm React uses to diff one tree with another to determine which parts need to be changed.
 //Virtual DOM: React creates a virtual representation of the DOM (a lightweight in-memory copy), which allows React to quickly check changes without manipulating the actual browser DOM immediately.
 
-Diffing Process: When the state or props of a component change, React compares the new virtual DOM (after changes) to the previous one. This comparison process helps React identify what has changed, where, and how.
+//Diffing Process: When the state or props of a component change, React compares the new virtual DOM (after changes) to the previous one. This comparison process helps React identify what has changed, where, and how.
 
 Tree Reconciliation:
 
@@ -405,3 +470,258 @@ context api jo kamm karata hai redux bhi same kam karata hai,context api alag se
 context api -- matlab ek global variable bana raha hu usake andar sara data jayega
 redux--state managent --manages state in organise way
 ,redux ke kai versions hai redux ek sTandalone library hai par react ke andar agar hame kam karana hai to ek library hai react-Redux  to isko bhi ham log use kar lete hai ,is redux ka hi easier version market mai jisko bola jata hai redux-toolkit(RTK)
+
+
+//react ka local storage javascriipt ka , next js ka local storage as such koi nai chij nai hai vo browser ka local storage hai ab apko use react ke through acces karo javascriipt ke through access karo vue ke though karo kkuch naya hai nai usame vo at the end browser ka local storage hai
+//localstorage --- ek iska issue ata hai chotasa ki value isme ekbar rakh dete hai na to sari string format  mai ho jati hai to values lete time , dete time apko ise json mai convert,deconvert respectively karana padata hai , value lete time hame string mai milti jisko hame json mai convert karana padata hai aur value dete time hame use string mai convert karake
+deni padati hai
+
+
+//aap ek hi file mai multiple useEffects use kar sakate ho
+//redux apne ap mai ek independent state maanagment library hai
+
+
+enivironment variable file that is .env file ek hi bar load hoti hai usually jab bhi enivironment variable mai app koi change karate hai to application ko ek bar close karake  dobara chalana padta hhai tabhii vo change reflect hota hai , apko file ka access isi tarah milega process.env kyuki ye jo enivironment variable file hai na ye process ke andar define hoti hai
+
+
+ham mega project ko is tarah bana rahe ki ham aage jagar jo bucket servicess hai unko alag nikala sake project mai jo bhi use kiya hai us sabko restructure kar sake taki
+ham aage firebase use kare ya fir khudh ka backend servicse use kare ham ye sari servicess vaha par dobara se reuse kar sakate hai
+
+//login and logout in appwrite --- login karane keliye hamane seession create kiya that (account.createSession)  in the case of logout what we did is we justt deleted the
+session here we get two options deleteSession and deleteSessions singular and plural means we can delete one session or we can delete all the sessions think that if logedd
+in on the one or more browser or on the same browser but on diifferent tabs then deleting all the sessions will log you out from all of the browser and tabs on whichever you got logged in
+//calling getUser method on accout gets you the current user
+
+
+
+component based design -- it is very common in all the applications jo bhi react use karate hai
+
+most of the chije appwrite ke andar ek proomises hoti hai (RTE--real time editor we are using it in our mega blog app project )
+
+
+
+
+//----------------------------------------------forwardRef-------------------------
+
+Why are we passing ref?
+In React, refs are used to reference and interact directly with DOM elements or class components, rather than using state and props. This can be particularly useful when you need to access or manipulate a DOM element directly (e.g., focusing an input field, measuring its size, etc.) outside of React's typical rendering cycle.
+
+Here's a breakdown of why we're passing ref:
+Accessing DOM Elements: Normally, React handles rendering and updating the DOM for you. However, sometimes you need to access a DOM element directly, like focusing an input. This is where refs come in.
+
+Forwarding the Ref:
+
+By default, in functional components, you cannot attach a ref directly to an element inside the component because functional components do not expose a ref by themselves.
+React.forwardRef is a higher-order function that allows a functional component to accept a ref from its parent and forward it down to a DOM element, such as an <input>, within the child component.
+Example Explanation:
+
+Parent Component:
+
+jsx
+Copy code
+const parentRef = useRef();
+<Input ref={parentRef} />
+Here, parentRef is a reference created in the parent component using useRef(). It is passed as a prop to the Input component.
+
+Child Component: Inside the Input component, forwardRef allows you to pass that ref down to the <input> element:
+
+jsx
+Copy code
+const Input = React.forwardRef(function Input({ label, type = "text", className = "", ...props }, ref) {
+    return <input ref={ref} {...props} />;
+});
+Now, the parent component has direct access to the DOM node of the <input> field. For example, you can focus the input field using:
+
+jsx
+Copy code
+parentRef.current.focus(); // Focuses the input element
+Why it's useful:
+Without using forwardRef, the parent would not be able to access the DOM element inside the child. forwardRef solves this problem by allowing the parent to interact with the child’s DOM element directly, even though it's wrapped inside a functional component.
+
+🗒️ Answer
+We pass the ref to the <input> element so the parent component can access the input field directly. For example, in a parent component, you can do this:
+
+jsx
+Copy code
+const parentRef = useRef();
+<Input ref={parentRef} />
+Then in the parent component, you can call parentRef.current.focus() to focus on the input field, which wouldn't be possible without using forwardRef. The forwardRef enables the parent component to reference and control the child component’s DOM elements directly.
+
+
+What is forwardRef and why are we using it?
+forwardRef is a React utility that allows you to pass a ref from a parent component to a child component. By default, refs can only be attached to DOM elements. However, in a functional component, ref does not automatically forward to the DOM element. That's where forwardRef comes in.
+
+When we use React.forwardRef, it allows the Input component to receive a ref as its second argument and forward it to the actual DOM element (like an <input>). This is particularly useful when we need to access the DOM element for tasks like focusing, measuring, or handling user input directly from the parent component.
+
+What does ref={ref} do on the <input> element?
+The ref={ref} attaches the ref to the actual <input> element inside the component. When a parent component passes a ref to the Input component, React uses forwardRef to pass that ref down to the <input> DOM element. This allows the parent to directly interact with the input field (e.g., focusing the input or reading its value).
+
+
+const copyPasswordToClipboard = useCallback(() => {
+    passwordRef.current?.select();
+    passwordRef.current?.setSelectionRange(0, 999);
+    window.navigator.clipboard.writeText(password)
+}, [password]);
+
+<input
+    type="text"
+    value={password}
+    className="outline-none w-full py-1 px-3"
+    placeholder="Password"
+    readOnly
+    ref={passwordRef}
+/>
+🗒️ Answer
+Reference Logic and How It Works:
+useRef(null):
+
+passwordRef is created using the useRef hook, which returns an object with a current property. This property can be assigned to the DOM element, in this case, the <input> element.
+Initially, passwordRef.current is null, but after the component mounts, it points to the actual DOM node (<input>).
+Attaching the ref to the DOM:
+
+The ref={passwordRef} is added to the <input> element. This makes the passwordRef.current point to the DOM node of the input field once it is rendered.
+Understanding the Syntax:
+passwordRef.current?.select();:
+
+select() is a method on HTML input elements that selects the entire text in the input field.
+The ?. is optional chaining, which ensures that select() is called only if passwordRef.current is not null or undefined.
+passwordRef.current?.setSelectionRange(0, 999);:
+
+setSelectionRange(start, end) is another method for selecting a range of text in an input field.
+0 is the starting index of the selection (beginning of the text), and 999 is the end index (effectively selecting the whole text in the field, assuming the password length is less than 999 characters).
+Again, the optional chaining (?.) ensures the method is only called if passwordRef.current is not null.
+What the copyPasswordToClipboard Function Does:
+The function is triggered (probably by a button click) and performs three actions:
+Select the text inside the <input> field.
+Select all text from index 0 to 999 (useful in case the password length varies).
+Copy the text to the clipboard using window.navigator.clipboard.writeText(password).
+
+
+//------------------------react hook formm-------------
+
+
+Sure! Let me explain the code in detail and address your specific question about Controller, control, and how it relates to React Hook Form.
+
+Code Breakdown
+The code you're looking at is a React component that wraps a TinyMCE editor (<Editor />) and integrates it with React Hook Form. The main goal of this component is to make the TinyMCE editor work like any other form input field in React, allowing you to validate and capture its value using React Hook Form.
+
+Let's break it down:
+
+1. The component itself: RTE
+jsx
+Copy code
+export default function RTE({name, control, label, defaultValue = ""}) {
+This is the functional component that receives props:
+
+name: This is the name of the form field that will be used in the React Hook Form. This name will be used to reference the value of the field.
+control: This is the control object provided by React Hook Form. It allows us to manage the state and validations of form inputs (including custom components).
+label: This is the label text that you want to display for this field.
+defaultValue: This is the default value of the TinyMCE editor when it is initialized. If it's not passed as a prop, it defaults to an empty string.
+2. Rendering the Label
+jsx
+Copy code
+{label && <label className='inline-block mb-1 pl-1'>{label}</label>}
+If the label prop is provided, it renders a <label> element with some basic styling (mb-1, pl-1 are just Tailwind CSS classes for margin and padding).
+
+3. The Controller Component
+jsx
+Copy code
+<Controller
+  name={name || "content"}
+  control={control}
+  render={({field: {onChange}}) => (
+    <Editor
+      initialValue={defaultValue}
+      init={{
+        // TinyMCE editor configuration here...
+      }}
+      onEditorChange={onChange}
+/>
+  )}
+/>
+Now, let's break down the most important part: Controller.
+
+What is Controller in React Hook Form?
+Controller is a wrapper component provided by React Hook Form. It helps you integrate external form controls or custom components (like the TinyMCE editor in this case) with React Hook Form.
+
+Why do we need Controller? React Hook Form is built around the concept of controlled components, but it does not know how to directly control every input (like a custom editor). This is where Controller comes in. It acts as a bridge between React Hook Form and your custom components.
+
+What is it doing? The Controller component allows you to pass the control object from React Hook Form to your custom input (the TinyMCE editor in this case) and automatically manages its state (value, validation, etc.).
+
+Props of Controller:
+name: This is the name of the form field. It's how React Hook Form will track the value for this field in the form state. If name is not provided, it defaults to "content".
+
+control: This is the control object passed down from useForm() hook of React Hook Form. It contains all the logic for form validation, handling, and state management. Without control, the Controller wouldn't know how to link to the form state.
+
+render: The render function is how you connect your custom component (TinyMCE editor) to the form. The render prop receives a field object which contains various properties and methods to manage the form field. The most important one here is onChange, which is used to update the form state whenever the content of the TinyMCE editor changes.
+
+Inside render (Custom Component Logic)
+jsx
+Copy code
+render={({field: {onChange}}) => (
+  <Editor
+    initialValue={defaultValue}
+    init={{
+      // TinyMCE editor configuration...
+    }}
+    onEditorChange={onChange}  // This connects the editor's change event to React Hook Form
+  />
+)}
+onChange: This is the function provided by React Hook Form's Controller. Every time the content inside the TinyMCE editor changes, this function is called to update the form state with the new value.
+
+The TinyMCE Editor component takes an initialValue prop, which is the content that will initially appear inside the editor. Here, you are passing defaultValue from the parent component.
+
+onEditorChange={onChange}: This is where the magic happens! onEditorChange is an event that triggers whenever the content inside the TinyMCE editor changes. Instead of letting the editor manage its own state, we use React Hook Form's onChange function to update the form's value. This way, React Hook Form will keep track of the editor's content.
+
+4. TinyMCE Editor Initialization
+jsx
+Copy code
+init={{
+  initialValue: defaultValue,
+  height: 500,
+  menubar: true,
+  plugins: [
+    "image", "advlist", "autolink", "lists", "link", "charmap", "preview",
+    "anchor", "searchreplace", "visualblocks", "code", "fullscreen",
+    "insertdatetime", "media", "table", "code", "help", "wordcount", "anchor",
+  ],
+  toolbar: "undo redo | blocks | image | bold italic forecolor | alignleft aligncenter bold italic forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent |removeformat | help",
+  content_style: "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }"
+}}
+This part is just the TinyMCE editor's configuration:
+
+Plugins: You're adding a set of plugins like image, link, bold, italic, etc., to enhance the editor's functionality.
+Toolbar: This defines what options are available in the TinyMCE toolbar (e.g., undo, redo, bold, italic, etc.).
+content_style: It applies basic CSS styling for the editor's content, ensuring it matches the rest of your app's font style.
+Summary
+React Hook Form: This is a library used for managing form state and validation in React applications. It's optimized for performance and reduces boilerplate code.
+Controller: The Controller component from React Hook Form is a way to "connect" custom inputs (like TinyMCE) to React Hook Form's form management system. It handles the value state, validation, and updates to the form state.
+TinyMCE Editor: A rich text editor. Instead of using the usual <input> or <textarea>, you use the TinyMCE editor to handle rich text input.
+The onChange function (from Controller) ensures that every time the editor's content changes, React Hook Form is notified and the form state is updated.
+By using Controller, you're able to make TinyMCE behave like a form input, with all the benefits of React Hook Form: managing its value, validating it, and using it in the form submission process.
+
+
+const {registre,handlesubmit,watch,control,setValue,getValues}=useForm()
+
+watch--apko ye watching capabilities bhi deta hai taki kisi field ko apko continuously monitor karana hai to watch capabilities bhi deta hai aap kisi bhi form kai sath watch laga sakate hai
+
+setValue--kisi bhi form ke andar agar koi value set karani hai to ab ham directly value likhke nai karate kyuki ham forms jo hai vo react ke forms use kar rahe hai react hook form isi tarah se values ko set kiya jata hai
+
+
+ye useForm ham jis component mai likh rahe hai vo parent component hai aur uske andar child components(custom components) ya fir external form controls samjho hai
+useForm se jo control object mila hai agar vo ham pass kare as a prop to child components(custom componets(remember RTE componet example)) to child component to child component ka pura control(states,values and all) mujhe parent component mai mil jayega
+
+getValues -- to jitne forms hai unaki values agar aapko kabhi bhi grab karani hai sare forms ya jiski bhi to aap yaha se le sakate hai
+
+react hook form ka yahi sab se bada fayda hai ki ham is type ke forms bana sakate hai jo ki data accept kare
+
+what is REJEX?
+
+cors---browser cross origin se request ko serve nai karata , suppose kariye apka server kisi aur url/port/domain par hai aur apka frontend kisi aur url/port/domain par hai
+
+difference ways to solve cors error
+1.you can do that in backend by whitlisting the urls whom you want to give access to the server resorses ---simply remember whitelisting
+2.using proxy's
+3.
+
+cors jab bhi apko dikhe to aapka dimag sabse pehle jana chahiye backend ke andar shayad mera url hai vo whitelisted ani hai ya fir usaki entry nai hai

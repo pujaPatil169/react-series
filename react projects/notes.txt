@@ -1,0 +1,43 @@
+In React, refs are used to reference and interact directly with DOM elements or class components, rather than using state and props. This can be particularly useful when you need to access or manipulate a DOM element directly (e.g., focusing an input field, measuring its size, etc.) outside of React's typical rendering cycle.
+
+Here's a breakdown of why we're passing ref:
+Accessing DOM Elements: Normally, React handles rendering and updating the DOM for you. However, sometimes you need to access a DOM element directly, like focusing an input. This is where refs come in.
+
+Forwarding the Ref:
+
+By default, in functional components, you cannot attach a ref directly to an element inside the component because functional components do not expose a ref by themselves.
+React.forwardRef is a higher-order function that allows a functional component to accept a ref from its parent and forward it down to a DOM element, such as an <input>, within the child component.
+Example Explanation:
+
+Parent Component:
+
+jsx
+Copy code
+const parentRef = useRef();
+<Input ref={parentRef} />
+Here, parentRef is a reference created in the parent component using useRef(). It is passed as a prop to the Input component.
+
+Child Component: Inside the Input component, forwardRef allows you to pass that ref down to the <input> element:
+
+jsx
+Copy code
+const Input = React.forwardRef(function Input({ label, type = "text", className = "", ...props }, ref) {
+    return <input ref={ref} {...props} />;
+});
+Now, the parent component has direct access to the DOM node of the <input> field. For example, you can focus the input field using:
+
+jsx
+Copy code
+parentRef.current.focus(); // Focuses the input element
+Why it's useful:
+Without using forwardRef, the parent would not be able to access the DOM element inside the child. forwardRef solves this problem by allowing the parent to interact with the child’s DOM element directly, even though it's wrapped inside a functional component.
+
+🗒️ Answer
+We pass the ref to the <input> element so the parent component can access the input field directly. For example, in a parent component, you can do this:
+
+jsx
+Copy code
+const parentRef = useRef();
+<Input ref={parentRef} />
+Then in the parent component, you can call parentRef.current.focus() to focus on the input field, which wouldn't be possible without using forwardRef. The forwardRef enables the parent component to reference and control the child component’s DOM elements directly.
+

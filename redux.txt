@@ -1,0 +1,176 @@
+redux store ek single source of truth hota hai jaha par hamari states store hoti hai ,fir jitne bhi ham components banayenge chahe vo nested ho ya independent sab redux store se bat karenge ,prop drilling mai kaise hota tha childd component parent component se bat karate the state variable keliye , redux mai sare ke sare components bat karenge redux store se including app.js bhi ,redux store mai hamane kuch bhi update kiya to vo directly update hojayega hamari application mai
+//store mai ham hamari states ko store karengge,ek bar mai hamane store bana liya to ham kya karenge us store ki access dilayenge apani app ko ,apani app ko access dilane keliye hame store ko aur provider ko import karana padega ,provider kya karega redux store ko puri app ko provide karega aur ham provider ko react-redux se import karenge main.js mai
+ham slice banane ke bat usko store mai configure karate hai , simple bhasha mai slice ki functionality ko hamane mai store mai add karadiya
+//slice -- iis ka matlab kya hai ki aap ek particular chij ko store karana chahte ho aur usase related function likhna chahte ho
+//reducers mai kuch kuch functionality hoti hai jo ki state ko change kar sakate hai ,reducer hamari madat karega state ko change karane maai ye initial state lega aur nai updated state return karega redux mai vo setState vale syntax ko use karane ki koi jarurat nai hai
+
+useSelector--ye line bas ye keh rahi hai ki hamare reudx store mai se count ko lekar aao,ye values ko read karanae keliye use karate hai
+useDispatch--ye basically actions ko call karata hai aur state change karake bhejata hai
+
+
+initialState---ke store starting mai kaisa dikhega , slices ke nam hote hai jo ham name property mai dete hai aur yahi nam fir jab ham redux toolkit use karenge chrome extenstion ka tab vaha par yahi nam show hoga
+
+ek milega state aur ek milega action in dono ka apko hamesha hi access milega reducers ke functions mai ye state,action dono automatica pass ho jate hai ,state jo hai na abhi jo bhi initialState mai currently hai us sabka access degi ,jo data ham fuctions mai as a argument pass karate hai vo data is action mai aa jata hai fir ham ise action.payload karke use karlete hai
+//
+eSelector aur useDispatch React-Redux ke hooks hain jo aapko Redux store ke saath interact karne mein madad karte hain. Inka kaam React components mein Redux state ko access aur update karne ka hota hai, bina kisi prop drilling ke. Yahan inke kaam karne ka tareeka hai:
+
+useSelector:
+
+useSelector ek hook hai jo Redux store se state ke kisi specific part ko access karta hai. Jab aap useSelector ko call karte hain, to yeh ek callback function leta hai jo Redux store se wo data return karta hai jo aapko chahiye hota hai.
+Yeh hook internal memoization ka use karta hai, iska matlab hai ki agar Redux state mein koi change nahi hota hai jo aapke selected data ko affect kare, to useSelector dobara render nahi hota.
+useDispatch:dispatch ek reducer kkko use karate huye store ke andar(state variables) changes karata hai
+dispatch ke andar hi reducer ko call karana padata hai
+useSelector--iske andar apko ek state ka access milta hai ek callback ke andar , ye state automatically pass hoti hai isko redux passs karta hai
+
+redux ek alag chij hai aur react-redux ek alag chij hai redux ek core library hai react-redux uska ek implementationa hai wiring karane ke lliye taki react aur redux ki batchit ho sake ,redux toolkit jab ham use karate hai to kafi kam hamare automatically ho chuke hote hai
+har application ka ek hi store hota hai jisko bola jaat hai single source of truth
+state ke andar apko updated state value in the store milti hai
+
+useDispatch hook Redux store ko access karta hai aur aapko dispatch function return karta hai. Isse aap Redux action ko dispatch kar sakte hain, jisse state update hota hai.
+Aap useDispatch ka istemal actions ko trigger karne ke liye karte hain jo reducers ke through state ko modify karte hain.
+Behind the scenes:
+
+Redux store mein state aur actions ko manage kiya jata hai. useSelector store se data nikalta hai aur component ko provide karta hai, jabki useDispatch action ko dispatch karta hai, jo Redux reducers ko call karke state ko modify karta hai.
+
+
+forEach:
+
+Purpose: Used to execute a function on each element of an array, but it does not return anything.
+Behavior: It performs the operation for each element but does not create a new array or modify the original array.
+Example:
+javascript
+Copy code
+let arr = [1, 2, 3];
+arr.forEach(item => console.log(item)); // Logs each item
+map:
+
+Purpose: Creates a new array with the results of calling a provided function on every element.
+Behavior: It iterates over each element and returns a new array with transformed elements, leaving the original array unchanged.
+Example:
+javascript
+Copy code
+let arr = [1, 2, 3];
+let newArr = arr.map(item => item * 2); // [2, 4, 6]
+filter:
+
+Purpose: Creates a new array with all elements that pass a test implemented by the provided function.
+Behavior: It iterates over each element and returns a new array containing only those elements that satisfy the condition in the function.
+Example:
+javascript
+Copy code
+let arr = [1, 2, 3, 4];
+let filteredArr = arr.filter(item => item > 2); // [3, 4]
+In summary:
+
+forEach: Loops through elements without returning anything.
+map: Transforms elements and returns a new array.
+filter: Filters elements based on a condition and returns a new array.
+
+Appwrite is an open-source platform that simplifies backend development for web, mobile, and Flutter applications. It provides ready-to-use services like databases, authentication, and file storage, allowing developers to focus on building apps rather than managing infrastructure. It's designed to work with any programming language and scale with your app's needs [1].
+
+Firebase is a comprehensive mobile and web app development platform offered by Google. It provides backend services such as real-time databases, authentication, cloud storage, and analytics. Firebase simplifies the development of high-quality applications and supports scalability while integrating easily with Google's other cloud services
+
+don't need to remember css , or tailwind classes you can refer them from the notes
+
+//---------------------------------------------------------useNavigate hook from react-router-dom == use for redirecting ------------------------------------------------
+
+How navigate works:
+
+function Login() {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const {register, handleSubmit} = useForm()
+    const [error, setError] = useState("")
+
+    const login = async(data) => {
+        setError("")
+        try {
+            const session = await authService.login(data)
+            if (session) {
+                const userData = await authService.getCurrentUser()
+                if(userData) dispatch(authLogin(userData));
+                navigate("/")
+            }
+        } catch (error) {
+            setError(error.message)
+        }
+    }
+
+    difference between navigation using link and navigate=useNavigate()  is that link agaar liya to us par hame click karana padata hai tabhi navigation hoga par navigate('/') se aap programatically use kai aur(jo route parenthesis ke andar diya hai var par bhej sakate ho ) bhej sakate ho
+The navigate function is a hook provided by React Router (useNavigate) that allows programmatic navigation within your React app. It changes the current URL and renders the corresponding route. In the code you provided, navigate("/") is used to redirect the user to the root URL ("/") after a successful login.
+
+Why we set setError("") initially:
+Setting setError("") to an empty string at the beginning of the login function ensures that any previous error messages are cleared before trying to log in again. This is useful to avoid showing outdated error messages from previous failed attempts. It resets the error state to indicate that a new login attempt is being made, and any potential errors from this attempt will be set later if needed (in the catch block).
+
+This approach gives a clean state for each login attempt and ensures that only relevant error messages are displayed to the user.
+
+
+. <Postcard {...posts} /> (Spread Operator)
+The syntax <Postcard {...posts} /> uses the spread operator (...), which is a shorthand way of passing the properties of an object as individual props to a React component.
+
+If posts is an object, the spread operator will "spread" all the keys and values from the posts object into separate props for the Postcard component. This is equivalent to manually passing each key-value pair in the object as a prop.
+
+For example, if posts looks like this:
+
+javascript
+Copy code
+const posts = {
+  title: 'Hello World',
+  content: 'This is a post.',
+  author: 'John Doe'
+};
+Then, using the spread operator:
+
+jsx
+Copy code
+<Postcard {...posts} />
+is equivalent to:
+
+jsx
+Copy code
+<Postcard title="Hello World" content="This is a post." author="John Doe" />
+Here, each key in the posts object becomes a prop on the Postcard component, with the corresponding value being passed as the value for that prop.
+
+When to Use
+You use the spread operator when you have an object with multiple properties and you want to pass all of them as individual props to a child component.
+It’s particularly useful when the structure of the object is dynamic or when you want to avoid manually listing each prop.
+2. <Postcard post={posts} /> (Passing a Single Prop)
+The syntax <Postcard post={posts} /> is the traditional way of passing a single prop to a component. Here, you're explicitly passing an object (the posts object) as a single prop called post.
+
+In this case, the Postcard component will receive a single prop named post, which contains the entire posts object.
+
+For example:
+
+jsx
+Copy code
+<Postcard post={posts} />
+In the Postcard component, you would access the posts object like this:
+
+jsx
+Copy code
+const Postcard = ({ post }) => {
+  return (
+    <div>
+      <h1>{post.title}</h1>
+      <p>{post.content}</p>
+      <small>{post.author}</small>
+    </div>
+  );
+};
+In this case, post is a single object, and you can access its properties using post.title, post.content, etc.
+
+When to Use
+You use this method when you want to pass the entire object as a single prop.
+This is more explicit and sometimes easier to manage, especially when the child component only needs the entire object (rather than individual properties).
+Key Differences:
+Syntax	Explanation
+<Postcard {...posts} />	Uses the spread operator to pass the properties of the posts object as individual props to the component.
+<Postcard post={posts} />	Passes the entire posts object as a single prop called post to the Postcard component.
+Which One to Use?
+Use <Postcard {...posts} /> if you want to pass many individual properties from an object as separate props to the child component. This is a good approach when the child component expects multiple props and you want to keep the code clean.
+
+Use <Postcard post={posts} /> if you want to pass the whole object as a single prop, particularly if the child component needs to work with the entire object (or the object is too large or complex to spread).
+
+Both approaches are valid, and the choice between them depends on your use case and the structure of your data.
+
+react ek frontend library hai aur frontend ka major jo kam hota hai vo ye hota ki backend se ham data le aur us data ko ache se ache fast aur optimise tarike se displaay karaye aur agar user se hame koi data lena hai to use backend par bohot hi optimise tarike se pohcha de (darling dont get trapped in tutorial tumhe har ek chij sikhne ki bhi jarurat nai hai bas jo sikh rahi ho vo puri tarike se achese apply karana ana chahiye aur puri understanding honi chahiye || project ke hisab se chijo ko sikha jaata hai ) jo bhi kuch sikhana hai projects ke through hi sikho tutorial hell mai mat pado

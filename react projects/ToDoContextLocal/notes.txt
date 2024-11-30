@@ -1,0 +1,18 @@
+When you store data in localStorage, it is always saved as a string. Therefore, even if you're saving a JSON object, it's actually converted to a string format using JSON.stringify(). To retrieve this data and use it as a JavaScript object, you must first parse the string back into JSON format using JSON.parse().
+
+Here’s how you can do it:
+
+Save data in localStorage: You would typically stringify your object before saving it.
+
+javascript
+Copy code
+let todos = [{ task: 'Do homework', done: false }];
+localStorage.setItem('todos', JSON.stringify(todos));
+Retrieve and parse the data: When you retrieve the data, it is in string format. To convert it back to a JavaScript object, you use JSON.parse():
+
+javascript
+Copy code
+let storedTodos = localStorage.getItem('todos');
+let todosObj = JSON.parse(storedTodos);  // Converts the string back to an object
+console.log(todosObj);  // Now you can use the data as a JavaScript object
+If the data stored in localStorage is valid JSON (which it should be if you used JSON.stringify()), JSON.parse() will successfully convert it back into the original object or array.
