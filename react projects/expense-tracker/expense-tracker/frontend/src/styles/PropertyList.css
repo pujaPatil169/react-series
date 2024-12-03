@@ -1,0 +1,57 @@
+.PropertyList{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items:end;
+    flex-wrap: wrap;
+    gap: 10px;
+
+}
+
+.image{
+
+    width:200px;
+    height:150px;
+    object-fit: cover;
+}
+
+
+
+
+
+
+/* Case 1:
+css
+Copy code
+.image {
+    max-width: 200px;
+    max-height: 150px;
+    object-fit: cover;
+}
+Effect on Image: This rule limits the image size to 200px width and 150px height as the maximum values.
+
+If the image's natural dimensions (width and height) are smaller than these values, it will display at its original size without stretching.
+If the image's natural size is larger, it will be scaled down to fit within the 200px width and 150px height limits. The aspect ratio will be preserved.
+object-fit: cover; ensures that the image fills the container, cropping parts of it if the aspect ratio doesn't match.
+When the image is smaller than the max dimensions: It will remain at its original size and not be resized.
+
+When the image is larger than the max dimensions: The image will be resized to fit within the specified maximum dimensions, maintaining the aspect ratio and cropping if necessary.
+
+Case 2:
+css
+Copy code
+.image {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+}
+Effect on Image: Here, both width and height are explicitly set to 200px and 150px. The image will always be stretched or shrunk to these exact dimensions, regardless of its original size.
+
+object-fit: cover; ensures the image still fills the container and might crop if the aspect ratio differs from the container's.
+When the image is smaller than the specified size: It will be stretched to fit 200px width and 150px height.
+
+When the image is larger than the specified size: It will be shrunk to fit the 200px width and 150px height, potentially cropping the image to preserve the container's aspect ratio.
+
+Key Difference:
+Max-Width/Max-Height (max-width, max-height) allow the image to stay smaller than the specified size if its natural size is smaller.
+Fixed Width/Height (width, height) forces the image to always match the specified dimensions, regardless of the image's natural size. */

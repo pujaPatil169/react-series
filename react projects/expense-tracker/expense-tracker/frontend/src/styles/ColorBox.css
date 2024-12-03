@@ -1,0 +1,7 @@
+.ColorBox{
+    height:900px;
+    width:900px;
+    display:flex;
+    flex-wrap: wrap;
+    object-fit: fill;
+}

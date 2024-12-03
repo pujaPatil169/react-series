@@ -1,0 +1,11 @@
+.BackgroundChanger{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    height:50px ;
+}
+
+.customClassByMe{
+    border: 2px solid white;
+    border-radius: 5px;
+}
