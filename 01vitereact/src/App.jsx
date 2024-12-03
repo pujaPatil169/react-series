@@ -10,6 +10,9 @@ import ColorBoxContainer from "./components/ColorBoxContainer";
 import BackgroundChanger from "./components/BackgroundChanger";
 import PasswordGenerator from "./components/PasswordGenerator";
 import Checked from "./components/Checked";
+import bgChanger from "./components/BgChanger";
+import BgChanger from "./components/BgChanger";
+import PasswordGenerator1 from "./components/PasswordGenerator(useCallbackUsed)/PasswordGenerator1";
 const properties = [
   { id: 129031, name: "Desert Yurt", rating: 4.9, price: 150 },
   { id: 129331, name: "Lone Mountain Cabin", rating: 4.8, price: 250 },
@@ -68,7 +71,9 @@ function App() {
      {/* <ImgMediaCard/> */}
      {/* <BackgroundChanger colors={colors}/> */}
      {/* <PasswordGenerator /> */}
-     <Checked/>
+     {/* <Checked/>. */}
+     {/* <BgChanger/> */}
+     <PasswordGenerator1/>
     </div>
   )
 }

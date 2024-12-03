@@ -190,3 +190,7 @@ This way, you correctly toggle the state of numberAllowed without causing the in
 //     document.execCommand("copy");  // Copies it to the clipboard
 //   };
   
+//dependencies are values inme agar kuch bhi chedchad hui to method vapise re-run hota hai ,method run hoga ya nai ye inpe depend hota hai dependencies pe
+//Dependencies in React are values (state, props, or other variables) that determine when a hook should re-run.
+// The dependencies array is a way to tell React to only run a hook when certain values change, helping to optimize performance.
+// Common hooks that use dependencies: useEffect, useMemo, and useCallback.

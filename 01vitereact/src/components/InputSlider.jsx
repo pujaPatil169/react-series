@@ -12,8 +12,8 @@ const Input = styled(MuiInput)`
   width: 42px;
 `;
 
-export default function InputSlider() {
-  const [value, setValue] = React.useState(30);
+export default function InputSlider({handleChangeInParent}) {
+  const [value, setValue] = React.useState(4);
 
   const handleSliderChange = (event, newValue) => {
     setValue(newValue);
@@ -31,6 +31,10 @@ export default function InputSlider() {
     }
   };
 
+  React.useEffect(()=>{
+    handleChangeInParent(value)
+  },[value])
+
   return (
     <Box sx={{ width: 250 }}>
       <Typography id="input-slider" gutterBottom>
@@ -45,6 +49,9 @@ export default function InputSlider() {
             value={typeof value === 'number' ? value : 0}
             onChange={handleSliderChange}
             aria-labelledby="input-slider"
+            min={4}
+            max={10}
+            step={1}
           />
         </Grid>
         <Grid item>
@@ -54,9 +61,9 @@ export default function InputSlider() {
             onChange={handleInputChange}
             onBlur={handleBlur}
             inputProps={{
-              step: 10,
-              min: 0,
-              max: 100,
+              step: 1,
+              min: 4,
+              max: 10,
               type: 'number',
               'aria-labelledby': 'input-slider',
             }}
@@ -66,3 +73,31 @@ export default function InputSlider() {
     </Box>
   );
 }
+
+
+//--------------------second argument newValue automatically passed------------
+
+// In React, when using a Slider component, the onChange event handler typically receives two arguments:
+
+// The event object (first argument) — This contains details about the event that triggered the change, such as event.target or event.currentTarget.
+// The new value (second argument) — This is the updated value of the slider after the user moves it. This value is passed automatically by the Slider component.
+// If you're not seeing the second argument in your handler function, it's likely due to one of the following reasons:
+
+// Arrow Function Used Inside onChange: If you use an arrow function or a regular function in your onChange handler, make sure it includes the second argument. Here's an example:
+
+// jsx
+// Copy code
+// const handleSliderChange = (event, newValue) => {
+//   setValue(newValue); // 'newValue' is the second argument
+// };
+// Destructuring or Syntax Issue: If you're not explicitly showing the second argument in the function signature, ensure your syntax is correct. For example, if you're omitting it or destructuring incorrectly, React might not pass it as expected.
+
+// Different Slider Component: Some custom sliders might not pass the second argument by default, so check the documentation to ensure it supports the expected behavior.
+
+// Solution Example:
+// jsx
+// Copy code
+// <Slider
+//   value={value}
+//   onChange={(event, newValue) => setValue(newValue)}  // newValue is automatically passed here
+// />

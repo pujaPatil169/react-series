@@ -340,7 +340,7 @@ Key Difference:
 Max-Width/Max-Height (max-width, max-height) allow the image to stay smaller than the specified size if its natural size is smaller.
 Fixed Width/Height (width, height) forces the image to always match the specified dimensions, regardless of the image's natural size.
 
-//-----------------------------DOM  Events ----------------------------------
+//-----------------------------DOM  Events/Hooks-useCallback ----------------------------------
 //in the regular javascriipt(vanila javascritpt) the event names are not camel case but when we use that same events in jsx(react) we must need to wriitee them in camel case , well all the DOM Events that exist in vanila js they are also available to use in react(jsx) but thee only difference is in jsx we need to write them in camel case
 
 
@@ -358,10 +358,39 @@ Fixed Width/Height (width, height) forces the image to always match the specifie
 
 When a component re-renders, React typically creates a new instance of all functions. This can lead to unnecessary re-renders of child components or unnecessary re-executions of effects. By using useCallback, React will only recreate the function when its dependencies (usually props or state) change. This helps in improving performance, especially in components with complex trees
 
+
+//---------------------Component mount-----------------------
+//component mount--In React, "mounting" refers to the process when a component is first created and inserted into the DOM (Document Object Model). It occurs when the component is initialized and React begins rendering it
+Mounting is the first step of a component’s lifecycle, and it indicates that the component is now available on the page for interaction and manipulation.
+
+Key points about mounting:
+
+Initialization: React sets up the component's state, props, and context.
+Rendering: The component renders the initial UI.
+Insertion: The component is inserted into the DOM.
+When a component "unmounts," it means it is being removed from the DOM
+//custom hooks built in hooks ko use kar sakate hai
+//har bar ek object ko access kaarane keliye dot jaruri nai hai
+//jab bhi koi component Mount hota hai means jab bhi uska life cycle event trigger hota hai tab useEffect hook run hota hai
+
+//-------------event object-------------
+
+//event object se mostly values strings mai milata hai to agar tum e.targe.value ek numerical hai to use use karaane se pehle Number mai wrap karado like Number(e.target.value)
+
+//-----method Object.keys() returns an array of keys
+
+const currencyInfo = {
+  USD: 'Dollar',
+  EUR: 'Euro',
+  JPY: 'Yen'
+};
+
+console.log(Object.keys(currencyInfo));
+// Output: ["USD", "EUR", "JPY"]
+
 //-------------custom hooks -----------------
 
-//agar aapke pass fiile mai jsx return ho raha hai to file ke nam mai extension .jsx lagao aur agar jsx return nai ho raaha js return horaha hai to extension .js rakho ,hooks majority of the cases mai js return karate hai , custom hooks built in hooks ko use kar sakate hai
-//har bar ek object ko access kaarane keliye dot jaruri nai hai
+//agar aapke pass fiile mai jsx return ho raha hai to file ke nam mai extension .jsx lagao aur agar jsx return nai ho raaha js return horaha hai to extension .js rakho ,hooks majority of the cases mai js return karate hai , majority of the caases har hook ka nam use se start hota hai ye ek standard approach hai isliye jab ham Custom hooks banate hai to naam ke start mai use lagate hai,kai hooks optional arguments lete hai ham jo custom hook bana rahe hai currencyInfo optional argument ani leta usko currency ki info deni hi padati hai
 
 //jsx se hi to aapke dom element banate hai ,jab bhi aap loop lagayenge kisi jsx ke andar to aap ko ek key pass karani hi padegi nai to react samajh ni payega ki aap ek hi
 element bar bar to nai bana rahe ,"remember the key in loops in react "

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker - Expense Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/main.css"> <!-- Link to your custom CSS -->
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Expense Tracker</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2 class="text-center">Expense Details</h2>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Expense Name: <strong><%= expense.name %></strong></h5>
+                <p class="card-text">Amount: <strong>$<%= expense.amount.toFixed(2) %></strong></p>
+                <p class="card-text">Category: <strong><%= expense.category %></strong></p>
+                <p class="card-text">Date: <strong><%= new Date(expense.date).toLocaleDateString() %></strong></p>
+                <p class="card-text">Notes: <strong><%= expense.notes %></strong></p>
+                <a href="/expenses/new" class="btn btn-primary">Add Another Expense</a>
+                <a href="/home" class="btn btn-secondary">Back to Dashboard</a>
+                <!-- <a href="/dashboard" class="btn btn-secondary">Back to Dashboard</a> -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

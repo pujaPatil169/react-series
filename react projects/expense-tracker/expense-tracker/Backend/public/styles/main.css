@@ -1,0 +1,61 @@
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    
+}
+
+.hero {
+    background-image: url('https://media.istockphoto.com/id/1444665177/photo/investment-and-finance-concept-fundraising.jpg?s=170667a&w=0&k=20&c=GT_4PSyEw1WVCqXBwJzn2lNQ-ST1HV3rtkrxsdH7h_g='); /* Use a nice background image */
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+h1 {
+    font-size: 3.5rem;
+    opacity: 0;
+    animation: fadeIn 1s forwards 0.5s;
+}
+.navbar-brand{
+    color: white;
+}
+p {
+    font-size: 1.5rem;
+    opacity: 0;
+    animation: fadeIn 1s forwards 1s;
+}
+
+.btn {
+    opacity: 0;
+    animation: fadeIn 1s forwards 1.5s;
+}
+
+.navbar {
+    background-color: #212529;
+    transition: background-color 0.5s;
+}
+
+.navbar.scrolled {
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+.nav-link:hover,
+.btn:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s;
+}
